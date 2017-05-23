@@ -1,0 +1,477 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage[english, french]{babel}
+\graphicspath{{images/} 
+\geometry{legalpaper, lmargin=0.7in, bmargin=1in}}
+\selectlanguage{french}
+
+\begin{document}
+%%%%%%%%%%%%%%
+%page  titre en caractères plus large
+%%%%%%%%%%%%%%
+\begin{titlepage}   
+	\large{
+		\begin{center}
+			UNIVERSITÉ DE SHERBROOKE\\Faculté de génie\\
+			Département de génie électrique et génie informatique\\
+			\vspace{3cm}
+			{\LARGE\textbf{éléments de statique et dynamique}}\\
+			\vspace{2cm}
+			\LARGE{Rapport APP1}\\
+			\vspace{2cm}
+			Présenté à\\l'équipe professorale de la session S4\\
+			\vspace{2cm}
+			Produit par\\Axel Bosco, Philippe Garneau, Philippe Spino\\
+			\vspace{1cm}
+			\vfill{7 mai 2017 - Sherbrooke}
+		\end{center}
+	}
+\end{titlepage}
+\newpage
+%%%%%%%%%%%%%%
+%Table des matières
+%%%%%%%%%%%%%%
+\tableofcontents
+
+\newpage
+\section{Introduction}
+Dans le cadre de l'implémentation d'un système de commande du bras mécanique de l'entreprise CRM, il faut analyser le mouvement d'un point A sur le plan 2D de celui-ci. Le point A, situé à l'extrémité des bras du robot, bouge selon le bras BA attaché au moteur MB et le bras BA bouge selon le bras OB avec le moteur MO. Notre mandat est de déterminer les forces et les couples nécessaires pour maintenir le robot en équilibre ou de le bouger selon des directives spécifiques. Pour la résolution de la problématique, l'équipe a divisée l'ensemble en plusieurs étapes. La première étape fût de regarder la cinématique du système de manière générale, ensuite dans des cas avec des restrictions sur les mouvements possibles du point A dans le plan 2D. En deuxième partie, l'analyse est centrée sur la statique et la dynamique du système. 
+
+\section{Cinématique}
+Dans l'analyse de la cinématique, il y avait trois cas à analyser. Il faut déterminer la relation du mouvement du Point A en reliant les mouvements angulaires des bras OB et BA au mouvement linéaire du point A dans tous les cas. Précisément, il faut déterminer les vecteurs de positions, de vitesses et d'accélération linéaire du point A en fonction des longueurs des bras, soit L1 et L2, des angles $\phi$ et $\theta$ et de leur vitesse et accélération angulaires respectives. Les calculs présentés dans la section suivante explique les démarches mathématiques utilisées pour la résolution des cas.
+
+\subsection{Équations générales}
+\noindent Équation générale: vecteur position
+
+\begin{equation}
+\overrightarrow{OA} = 
+    l_1\Bigg[\begin{array}{cc}
+    cos(\theta) \\
+    sin(\theta) \\
+    0
+    \end{array}\Bigg]
+    +
+    l_2\Bigg[\begin{array}{cc}
+    cos(\phi) \\
+    sin(\phi) \\
+    0
+    \end{array}\Bigg]
+\end{equation}
+
+\noindent Équation générale: vecteur vitesse
+
+\begin{equation}
+\overrightarrow{V_{OA}} = 
+    l_1\Bigg[\begin{array}{cc}
+    -sin(\theta)\theta' \\
+    cos(\theta)\theta' \\
+    0
+    \end{array}\Bigg]
+    +
+    l_2\Bigg[\begin{array}{cc}
+    -sin(\phi)\phi' \\
+    cos(\phi)\phi' \\
+    0
+    \end{array}\Bigg]
+\end{equation}
+
+\noindent Équation générale: vecteur accélération
+
+\begin{equation}
+\overrightarrow{\alpha_{OA}} =
+	l_1\Bigg[\begin{array}{cc}
+	-cos(\theta)(\theta')^2-sin(\theta)\theta'' \\
+	-sin(\theta)(\theta')^2+cos(\theta)\theta'' \\
+	0
+	\end{array}\Bigg]
+	+
+	l_2\Bigg[\begin{array}{cc}
+	-cos(\phi)(\phi')^2-sin(\phi)\phi'' \\
+	-sin(\phi)(\phi')^2+cos(\phi)\phi'' \\
+	0
+	\end{array}\Bigg]
+\end{equation}
+
+\newpage
+\subsection{Mouvement horizontal}
+\subsubsection{Relation entre $\theta$ et $\phi$ lorsque $\phi$ est negatif}
+\noindent Trouver $sin(\phi)$:
+
+\begin{equation}
+l_1 = l_2
+\end{equation}
+
+\begin{equation}
+\overrightarrow{Y_A} = l_1sin(\theta)+l_1sin(\phi)
+\end{equation}
+
+\begin{equation}
+0 = l_1sin(\theta)+l_1sin(\phi)
+\end{equation}
+
+\begin{equation}
+sin(\phi) = -sin(\theta)
+\end{equation}
+
+\noindent Trouver $cos(\phi)$ à partir de $sin(\phi)$:
+
+\begin{equation}
+cos^2(\phi)+sin^2(\phi) = 1
+\end{equation}
+
+\begin{equation}
+cos(\phi) = \sqrt{1-sin^2(\theta)}
+\end{equation}
+
+\subsubsection{Équations cinématiques}
+\noindent Position:
+
+\begin{equation}
+l_1 = l_2
+\end{equation}
+
+\begin{equation}
+\overrightarrow{X_A} = l_1cos(\theta)+l_1\sqrt{1-sin^2(\theta)}
+\end{equation}
+
+\begin{equation}
+\overrightarrow{X_A} = l_1cos(\theta)+l_1\sqrt{cos^2(\theta)}
+\end{equation}
+
+\begin{equation}
+\overrightarrow{X_A} = 2l_1cos(\theta)
+\end{equation}
+
+\noindent Vitesse:
+
+\begin{equation}
+\overrightarrow{V_{Ax}} = \frac{d(2l_1cos(\theta))}{dt}
+\end{equation}
+
+\begin{equation}
+\overrightarrow{V_{Ax}} = -2l_1sin(\theta)\theta'
+\end{equation}
+
+\begin{equation}
+\theta' = \omega_{OB}
+\end{equation}
+
+\begin{equation}
+\overrightarrow{V_{Ax}} = -2l_1sin(\theta)\omega_{OB}
+\end{equation}
+
+\newpage
+\noindent Accélération:
+
+\begin{equation}
+\overrightarrow{\gamma_{Ax}} = \frac{d(-2l_1sin(\theta)\theta')}{dt}
+\end{equation}
+
+\begin{equation}
+\overrightarrow{\gamma_{Ax}} = -2l_1cos(\theta)(\theta')^2-2l_1sin(\theta)\theta''
+\end{equation}
+
+\begin{equation}
+\theta' = \omega_{OB}
+\end{equation}
+
+\begin{equation}
+\theta'' = \alpha_{OB}
+\end{equation}
+
+\begin{equation}
+\overrightarrow{\gamma_{Ax}} = -2l_1cos(\theta)(\omega_{OB})^2-2l_1sin(\theta)\alpha_{OB}
+\end{equation}
+
+\subsubsection{Courbes du mouvement horizontal}
+\noindent Position:
+\newline
+\noindent \includegraphics[width=\textwidth]{hori_pos}
+Avec les contraintes, la position de $A_y$ doit être fixée à la hauteur du point O en tout temps. Ceci oblige un mouvement horizontal seulement. Selon le graphique, la position initiale en $A_x$ est à distance de $l_1 + l_2$. Plus $\theta$ est grand, plus le déplacement horizontal est rapide. La position finale atteinte à $\pi/3$ est à distance de $l_1$ du point O.
+\newline
+\newline
+\noindent Vitesse:
+\newline
+\noindent \includegraphics[width=\textwidth]{hori_vit}
+Initialement au repos, la vitesse varie et accélère en fonction de $\theta$. Cependant, l'accélération est de moins en moins grande au fil du temps. Puisque le déplacement est négatif, la vitesse est négative au fil du déplacement. À la configuration finale du robot, la vitesse de son déplacement horizontal est environ $-11 m/s$.
+
+\newpage
+\noindent Accélération:
+\newline
+\noindent \includegraphics[width=\textwidth]{hori_accel}
+À l'instant où le robot a commencé son déplacement horizontal, l'accélération est à son maximum. À mesure que $\theta$ grandit, l'accélération diminue. Puisque les angles sont de plus en plus grands, la distance séparant le point O au point A est de moins en moins grande. Pour la même distance de déplacement entre deux points en comparaisons avec deux autres, la variation de $\theta$ doit être plus grande.
+
+\subsubsection{Configuration initiale et finale horizontale}
+\noindent Initiale:
+\newline
+\centerline{\noindent \includegraphics[scale=0.75]{IH}}
+\newline
+\newline
+\newpage
+\noindent Finale:
+\newline
+\centerline{\noindent \includegraphics[scale=0.75]{FH}}
+\newline
+
+\subsection{Mouvement vertical}
+\subsubsection{Relation entre $\theta$ et $\phi$ lorsque $\phi$ est négatif}
+\noindent Trouver $cos(\phi)$:
+
+\begin{equation}
+l_1 = l_2
+\end{equation}
+
+\begin{equation}
+\overrightarrow{X_A} = l_1cos(\theta)+l_1cos(\phi)
+\end{equation}
+
+\begin{equation}
+l_1 = l_1cos(\theta)+l_1cos(\phi)
+\end{equation}
+
+\begin{equation}
+cos(\phi) = 1-cos(\theta)
+\end{equation}
+
+\newpage
+\noindent Trouver $sin(\phi)$ à partir de $cos(\phi)$:
+
+\begin{equation}
+cos^2(\phi)+sin^2(\phi) = 1
+\end{equation}
+
+\begin{equation}
+sin^2(\phi) = 1-cos^2(\phi)
+\end{equation}
+
+\begin{equation}
+sin^2(\phi) = -cos^2(\theta)+2cos(\theta)
+\end{equation}
+
+\begin{equation}
+\pm sin(\phi) = \sqrt{-cos^2(\theta)+2cos(\theta)}
+\end{equation}
+
+\noindent Nous considerons que $\phi$ est négatif, donc:
+
+\begin{equation}
+sin(\phi) = -\sqrt{-cos^2(\theta)+2cos(\theta)}
+\end{equation}
+
+\subsubsection{Équations cinématiques}
+\noindent Position:
+
+\begin{equation}
+l_1 = l_2
+\end{equation}
+
+\begin{equation}
+\overrightarrow{Y_A} = l_1sin(\theta)-l_1\sqrt{-cos^2(\theta)+2cos(\theta)}
+\end{equation}
+
+\noindent Vitesse:
+
+\begin{equation}
+\overrightarrow{V_{Ay}} = \frac{d(l_1sin(\theta)-l_1\sqrt{-cos^2(\theta)+2cos(\theta)})}{dt}
+\end{equation}
+
+\begin{equation}
+\overrightarrow{V_{Ay}} = l_1cos(\theta)\theta'-\\
+\frac{l_1(-cos^2(\theta)+2cos(\theta))'}{2\sqrt{-cos^2(\theta)+2cos(\theta)}}
+\end{equation}
+
+\begin{equation}
+\overrightarrow{V_{Ay}} = l_1cos(\theta)\theta'-\\
+\frac{l_1sin(\theta)(cos(\theta)-1)\theta'}{\sqrt{-cos^2(\theta)+2cos(\theta)}}
+\end{equation}
+
+\begin{equation}
+\theta' = \omega_{OB}
+\end{equation}
+
+\begin{equation}
+\overrightarrow{V_{Ay}} = l_1cos(\theta)\omega_{OB}-\\
+\frac{l_1sin(\theta)(cos(\theta)-1)\omega_{OB}}{\sqrt{-cos^2(\theta)+2cos(\theta)}}
+\end{equation}
+
+\subsubsection{Courbes du mouvement vertical}
+\noindent Position:
+\newline
+\noindent \includegraphics[width=\textwidth]{vert_pos}
+Selon les contraintes, la configuration initiale exige que $A_x$ est toujours à distance de L1 du point O. Puisque la relation entre $theta$ et $phi$ est lorsque $phi$ est négatif, la position $A_y$ est à L2 de distance du point O pour le mouvement vertical. Le déplacement est linéaire et permet de trouver la configuration finale du robot à $theta/3$, en respectant la contrainte que $A_x$ est toujours à la même distance de L1.
+\newline
+\newline
+\noindent Vitesse:
+\newline
+\noindent \includegraphics[width=\textwidth]{vert_vit}
+Puisqu'il existe la contrainte sur $A_x$, la vitesse varie en fonction des angles $theta$ et $phi$. À environ $theta = 0,7$, la courbe de vitesse change et accélère, alors que précédemment, elle décélérait. Jusqu'à $theta = 0,7$, la valeur de $phi$ est inférieur à $-pi/2$. Rendu à $theta = 0,7$, $phi$ devient supérieur à $-pi/2$ et la vitesse accélère, car les deux angles offrent un meilleur glissement au robot.
+
+\subsubsection{Configuration initiale et finale verticale}
+\noindent Initiale:
+\newline
+\centerline{\noindent \includegraphics[scale=0.75]{IV}}
+\newline
+\newline
+\noindent Finale:
+\newline
+\centerline{\noindent \includegraphics[scale=0.75]{FV}}
+\newline
+
+\subsection{Relation entre $\theta$ et $\phi$ et les commandes de $M_O$ et $M_B$}
+\noindent 
+Lorsque le moteur $M_B$ s'active, il affecte seulement la valeur de $\phi$. Par contre, lorsque le moteur $M_O$ s'active, il vient bien évidemment modifier la valeur de $\theta$, mais aussi la valeur de $\phi$, car les tiges OB et BA peuvent être considerée comme une seule tige OA lorsque seulement le moteur $M_O$ est en marche.
+
+\section{Statique et Dynamique}
+\noindent
+Pour l'analyse du système dans le domaine du statique, on considère le cas ou le robot porte un objet $O_A$ au point A. Pour simplifier l'analyse, les tiges, représenté par les vecteurs $\overrightarrow{OB}$ et $\overrightarrow{BA}$, sont approximés par des tiges minces et uniformes, les moteurs $M_O$, $M_B$ et $O_A$ sont approximés par des sphères de dimensions négligeables par rapport a OB et BA. On considère aussi que la force FB et le couple CB sont exercés sur l’extrémité B de la tige BA. FB est appliquée par OB alors que CB est appliqué par MB.
+
+\subsection{Statique}
+\noindent
+Dans le domaine statique, on fait l'étude du système a l'équilibre. C'est a dire lorsque: 
+\begin{equation}
+\sum \overrightarrow{F_{ext}} = 0
+\end{equation}
+
+\begin{center} 
+et quand:
+\end{center}
+
+\begin{equation}
+\sum \overrightarrow{M_B} = 0
+\end{equation}
+\newline
+\newline
+DCL du bras BA:
+\newline
+\begin{center}
+\noindent \includegraphics[scale = 0.4]{DCL_BA}
+\end{center}
+
+\noindent En appliquant les forces dans le Diagramme des Corps Libres, l'équation suivante est obtenue:
+
+\begin{equation}
+\sum \overrightarrow{F_{ext}} = -m_{BA}.\overrightarrow{g} -m_A.\overrightarrow{g} + \overrightarrow{F_B}
+\end{equation}
+
+\begin{equation}
+\sum F_x = -m_{BA}.g_x -m_A.g_x + F_{B_x} = 0
+\end{equation}
+
+\begin{equation}
+\sum F_y = -m_{BA}.g_y -m_A.g_y + F_{B_y} = 0
+\end{equation}
+
+\noindent Dans l'équation 41, il n'est pas nécessaire de calculer la valeur de $F_{B_x}$ car celle-ci vaut 0. Cela veut dire qu'il ne reste que $F_{B_y}$ comme force.
+
+\begin{equation}
+\ F_{B_y} = m_A.g + m_{BA}.g
+\end{equation}
+
+\noindent Il ne reste maintenant qu'à trouver la somme des moments de forces $\sum \overrightarrow{M_B}$.
+
+\begin{equation}
+\sum \overrightarrow{M_B} = -lm_Acos(\phi) - \frac{l}{2}m_{BA}gcos(\phi) + C_B = 0
+\end{equation}
+
+\noindent ce qui nous donne le couple $C_B$ suivant: 
+
+\begin{equation}
+\ C_B = lm_Acos(\phi)+ \frac{l}{2}m_{BA}gcos(\phi)
+\end{equation}
+
+\subsection{Dynamique}
+\noindent
+Dans l'analyse du domaine dynamique du système, il faut faire l'étude du mouvement engendré par le moteur $M_O$. En regardant le Diagramme Cinétique du bras BA, on peut déterminer $F_B$ et $C_B$ en fonction de l'angle $\phi$, de $l$ dans le cas ou BA tourne avec une accélération angulaire constante $\alpha_{BA}$ pendant que OB est immobile.
+\newline
+\newline
+\noindent DC du bras BA:
+\newline
+\begin{center}
+\noindent \includegraphics[scale = 0.4]{DC_BA}
+\end{center}
+
+\newpage
+\noindent En appliquant les forces dans le Diagramme Cinétique, l'équation suivante est obtenue:
+\begin{equation}
+\sum \overrightarrow{F_{ext}} = m_{BA}.\gamma_{G_{BA}} + m_A.\gamma_{G_A} + \overrightarrow{F_B}
+\end{equation}
+
+\begin{equation}
+    \Bigg[\begin{array}{cc}
+    F_{B_x} \\
+    F_{B_y} \\
+    0
+    \end{array}\Bigg]
+    =
+    m_{BA}\Bigg[\begin{array}{cc}
+    -\omega^2_{BA}\frac{l}{2} \\
+    \alpha_{BA}\frac{l}{2} \\
+    0
+    \end{array}\Bigg]
+    +
+    m_A\Bigg[\begin{array}{cc}
+    -\omega^2_{BA}l \\
+    \alpha_{BA}l \\
+    0
+    \end{array}\Bigg]
+\end{equation}
+
+\noindent Ensuite, un projection est faite:
+
+\begin{equation}
+\ F_{B_x} = \frac{-m_{BA}\omega_{BA}l}{2} - m_A\omega_{BA}l 
+\end{equation}
+
+\begin{equation}
+\ F_{B_y} = m_{BA}\alpha_{BA} + m_A\alpha_{BA}l + m_{BA}g + m_Ag
+\end{equation}
+
+\noindent En ce qui concerne la somme des moments d'inertie, 
+
+\begin{equation}
+\sum \overrightarrow{M_A} = I_A\alpha_A + I_{BA}\alpha_{BA}
+\end{equation}
+
+\begin{equation}
+\ I_A\alpha_A + I_{BA}\alpha_{BA} = C_B - M_B - M_A
+\end{equation}
+
+\begin{equation}
+\ C_B = (ml^2 + \frac{ml^2}{3})\alpha{BA}+ m_{BA}g\frac{l}{2}cos(\phi) + m_Aglcos(\phi)
+\end{equation}
+
+\subsection{Courbes obtenues de Statique et de Dynamique}
+Statique:
+\newline
+\noindent \includegraphics[width=\textwidth]{statique}
+\newpage
+\noindent Dynamique:
+\newline
+\noindent \includegraphics[width=\textwidth]{dynamique}
+
+\subsubsection{Analyse des courbes de Statique et Dynamique}
+\noindent
+À première vue, on remarque que la courbe dynamique est plus élevée que la courbe statique. Cette observation est attendue, car afin de faire bouger un objet, il faut qu'il soit en équilibre (statique) et qu'on ajoute une force additionnelle. Il peut aussi être observé que la courbe dynamique semble représenter une simple translation positive sur l'axe des y de la courbe statique. Ce phénomène pourrait être expliqué par le fait qu'en statique, la somme des forces est égale à 0, mais qu'en dynamique, la somme des forces est non nulle. Cette différence entre la somme des forces en statique et dynamique semble représenter la valeur numérique de la translation de la courbe statique vers le courbe dynamique.
+
+\section{Conclusion}
+\noindent
+Pour conclure, l'analyse des éléments physiques du robot, a permis de trouver une relation du point A dans le cas général, seulement sur le mouvement horizontal et seulement sur le mouvement vertical. De plus, à l'aide de cette relation, les courbes du cas horizontal et vertical ont permis de tracer les configurations initiales et finales du robot. L'analyse de l'analyse de l'équilibre du système a permis de trouver les forces lorsque robot est immobile et lorsqu'il est en mouvement. De ce, la force $\overrightarrow{F_B}$ a été trouvés et cette force a permis de trouver le couple $M_B$ du système a l'équilibre et lorsqu'il y a une force constant $\alpha$ appliquer au bras BA.
+
+\section{Code Matlab}
+\noindent \includegraphics[width=\textwidth]{main_code}
+\newline
+\newline
+\noindent \includegraphics[width=\textwidth]{position_code}
+\newline
+\newline
+\noindent \includegraphics[width=\textwidth]{speed_code}
+\newline
+\newline
+\noindent \includegraphics[width=\textwidth]{accel_code}
+\newline
+\newline
+\noindent \includegraphics[width=\textwidth]{stat_dyn_code}
+\end{document}
