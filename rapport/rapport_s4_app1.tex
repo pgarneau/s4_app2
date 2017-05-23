@@ -386,4 +386,91 @@ Statique:
 \section{Conclusion}
 \noindent
 Pour conclure, l'analyse des éléments physiques du robot, a permis de trouver une relation du point A dans le cas général, seulement sur le mouvement horizontal et seulement sur le mouvement vertical. De plus, à l'aide de cette relation, les courbes du cas horizontal et vertical ont permis de tracer les configurations initiales et finales du robot. L'analyse de l'analyse de l'équilibre du système a permis de trouver les forces lorsque robot est immobile et lorsqu'il est en mouvement. De ce, la force $\overrightarrow{F_B}$ a été trouvés et cette force a permis de trouver le couple $M_B$ du système a l'équilibre et lorsqu'il y a une force constant $\alpha$ appliquer au bras BA.
+aaaa
+
+\subsubsection{bassin}
+
+on début avec l'équation donner dans l'énoncé
+\begin{equation}
+\ m \frac{dv}{dt} = \sum F = mg - K_{f}mg - bv^2
+\end{equation}
+comme dictée par la 2e loi de Newton:
+\begin{equation}
+\ \frac{dv}{dt} = \frac{dv}{dz} \frac{dz}{dt} = v\frac{dv}{dz}
+\end{equation}
+en faisant la substitution pr/c/dente, en regroupant les terme et en divisant les deux cote par v on obtiens:
+\begin{equation}
+\ m\frac{dv}{dz} =  \frac{mg ( 1- K_{f})}{v} - bv
+\end{equation}
+On pose donc l'accélération a zero pour avoir le systèeme a l'équilibre nous donnant l'équation 57
+\begin{equation}
+\ 0 =  mg ( 1- K_{f}) - bv_{e})
+\end{equation}
+
+\begin{equation}
+\ v_{e} = \sqrt{\frac{mg(1-K_{f})}{b}}
+\end{equation}
+
+par la suite on doit linéariser notre équation 55 pour pouvoir facilement isoler notre z. On commence par linéarisser notre seul terme non lineaire etant 
+
+\begin{equation}
+\ \frac{mg ( 1- K_{f})}{v} = \frac{mg}{v_{e}}(1-K_{f})+
+\Bigg[\begin{array}{cc}
+    \frac{-1}{V_{e}^2}mg(1-K_{f})
+    \end{array}\Bigg]
+    (v-v_{e})
+\end{equation}
+en remplacant le tout dans lequation de base 55
+\begin{equation}
+mv \frac{dv}{dz} = mg - \Bigg[\begin{array}{cc}
+\frac{mg}{v_{e}}(1-K_{f})+
+\Bigg[\begin{array}{cc}
+    \frac{-1}{V_{e}^2}mg(1-K_{f})
+    \end{array}\Bigg]
+    (v-v_{e}) \end{array}\Bigg] - bv
+\end{equation}
+comme la on sait que
+\begin{equation}
+\Delta v = v - v_{e}  \quad  \textrm{donc} \quad    v = \Delta v+ v_{e}
+\end{equation}
+
+et que lon sosutrait les terme de l'equation a lequilibre on obtiens l'equation lineaire  ( en isolant les v et le z de chaque coté ):
+
+\begin{equation}
+\ m \frac{d \Delta v}{\Delta v}= \Bigg[\begin{array}{cc} \frac{1}{m} \Bigg[\begin{array}{cc}
+    \frac{-1}{V_{e}^2}mg(1-K_{f})
+    \end{array}\Bigg]  - b\end{array}\Bigg] d_{z}
+\end{equation}
+
+par la suite, on intègre chaque côté de l'équation. Comme le coté gauche est bornée de 0,1ve jusqu'a vi - ve, cela nous donne 4,9644. Comme le côté droit ne contient qu'une variable étant le dz qui deviendras $\Delta$ z
+ Le reste du calcul effectuer sur matlab nous donne un z de 4,23m.
+ 
+ 
+ \subsection{minuterie}
+ Pour la situation G1, ou le coefficient de restitution = 0
+ en utilisant les formules de conservation de l'energie 
+ 
+ \begin{equation}
+ m_{a}V_{a}^{n} + m_{b}V_{b}^{n} = m_{a}V_{a}^{'n} + m_{b}V_{b}^{'n}  \quad ainsi \quad que \quad e = \frac {V_{B}^{'n}-V_{A}^{'n}}{V_{A}^{n}-V_{B}^{n}} 
+ \end{equation}
+ sachant que $ V_{A}^{n}$ = 22,5 km/h et que $V_{B}^{n}$ = 3,6 km/h on trouve rapidement avec matlab que$ V_{A}^{'n}$ = 20,12 km/h et que $V_{B}^{'n}$ = 20,2 km/h 
+ 
+\vspace*{7mm}
+ Pour la situation G2, ou le coefficient de restitution = 0.8, avec les meme formules, on obtiens $ V_{A}^{'n}$ = 18,23 km/h et que $V_{B}^{'n}$ = 2,65 km/h 
+ 
+ sachant ces deux mesures, nous pouvons trouver le temps que prennent le participant pour franchir la distance de 3m. Pour le cas G1, avec incertitude de 0.02, on obtiens un r/sultat de 0,59 sec et pour G2, 0,54 sec
+ 
+ \subsection{coussin trampoline}
+ 
+ EN se basant sur la formule de l<acceleration gravitationelle et de la formule des ressorts, on trouve facilement le $\Delta x$ en resolvant lequation quadratique que donne notre developpement
+ 
+ \begin{equation}
+\ mg \Delta h = \frac{1}{2}k \Delta x ^2
+ \end{equation}
+ \begin{equation}
+ 88*9,81*(5+\Delta x) = \frac{1}{2}*6000*\Delta x^2 
+ \end{equation}
+ \begin{equation}
+ 0 = 3000\Delta x^2 - 863.28 \Delta x - 4316.4 \quad nous\quad  donnant\quad  un\quad  \Delta x=\quad 1.35m 
+ \end{equation}
 \end{document}
