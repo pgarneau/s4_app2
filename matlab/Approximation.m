@@ -32,18 +32,12 @@ for M = 1:(N-3)
         total = total + (result - coeff_matrix(index))^2;
     end
     
-    
-    
     rms = sqrt((1/N)*total);
-    % ON IGNORE M = 1, car c'est une ligne droite y = quelque chose
-    if rms < current_min_rms && M > 1
-        %Apres analyse, on garde M=4,donc
-        current_min_rms = rms;
-        min_rms_M = M;
-        min_rms_A = A;
-        if M == 4
-            used_A = A;
-        end
+
+    % On sait qu'on prend M=5, donc je sauvegarde les valeurs
+    if M == 5
+        used_A = A;
+        used_rms = rms;
     end
     
     % REPRESENTATION GRAPHIQUE
@@ -62,12 +56,12 @@ for M = 1:(N-3)
     str=sprintf('M = %d, RMS = %f', M, rms);
     xlabel(str)
 end
-str=sprintf('RMS minimum = %f et son M = %d', current_min_rms, min_rms_M);
-disp(str);
 
 % FIND OPENING PERCENTAGE FROM FRICTION COEFFICIENT
 % PLACEHOLDER VALUES FOR NOW
-M = 4;
+disp(used_A);
+disp(used_rms);
+M = 5;
 coeff = 0.63;
 result = FindOpeningPercentage(used_A, coeff, M);
 

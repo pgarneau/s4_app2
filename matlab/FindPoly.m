@@ -12,5 +12,6 @@ A = inv(P)*Y;
 
 syms x
 poly = A(1) + A(2)*x + A(3)*x.^2 + A(4)*x.^3 + A(5)*x.^4;
+disp(A);
 end
 

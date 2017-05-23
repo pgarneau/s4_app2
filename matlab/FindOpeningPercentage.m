@@ -8,7 +8,6 @@ for x = 1:M
         matrix(1,x) = A_matrix(M-x+1);
     end
 end
-disp(matrix);
 result = roots(matrix);
 end
 

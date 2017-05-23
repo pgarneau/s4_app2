@@ -45,7 +45,49 @@ Dans le cadre de l'implémentation d'un système de commande du bras mécanique 
 
 \section{Design de la trajectoire et du débit d'eau}
 \subsection{Hauteur de $y_f$ et coefficients du polynôme d'interpolation de la trajectoire}
-Afin de trouver la valeur de $y_f$, plusieurs étapes ont été nécessaires. En premier lieu, nous avons trouvé tous les polynômes d'interpolation de la trajectoire avec des valeurs de $y_f$ allant de 10m à 15m en incréments de 0.1m. 
+Afin de trouver la valeur de $y_f$, plusieurs étapes ont été nécessaires. En premier lieu, nous avons trouvé tous les polynômes d'interpolation de la trajectoire avec des valeurs de $y_f$ allant de 10m à 15m en incréments de 0.1m. Ensuite, nous avons fait la dérivée de  chaque polynôme et avons vérifié la valeur de celle-ci à la fin de la glissade, donc à x=25m. Nous avons sauvegardé toutes les valeurs de $y_f$ ayant un résultat de dérivée à $x=25m$ entre -0.01 et 0.01 et après avoir fait la moyenne de ces résultats, nous avons trouvé une valeur de $y_f=12.27m$. Le polynôme d'interpolation final de la trajectoire est:
+\begin{equation}
+y = 30-4.6001x+0.6310x^2-0.0329x^3+0.0006x^4
+\end{equation}
+
+\subsection{Vitesse de sortie du participant au point E sans friction}
+Afin de trouver la vitesse de sortie du participant au point E, il faut utiliser la loi de conservation de l'energie mecanique. Nous savons qu'il n'y a pas de force non-conservatives qui agissent sur notre systeme dans ce cas, donc l'equation est:
+\begin{equation}
+	\Delta E_p + \Delta E_c = 0
+\end{equation}
+
+\begin{equation}
+	mg\Delta h + \frac{1}{2}m\Delta v^2 = 0
+\end{equation}
+
+\begin{equation}
+	784.8(12.27-30) + 40(v-0)^2 = 0
+\end{equation}
+
+\begin{equation}
+	v = 18.65 m/s = 67.14 km/h
+\end{equation}
+En observant ce résultat, il est évident qu'une force de friction sera nécessaire afin de ralentir le participant pour ne pas dépasser les contraintes définies dans le devis.
+
+\subsection{Ordre et coefficients du polynôme d'approximation de $\mu_f$}
+Afin de trouver une bonne approximation de la relation entre le coefficient de friction et le pourcentage d'ouverture de la valve, nous avons utilisé la projection orthogonale. Pour chaque valeur de $M$ allant de $N-3$ à 1 où $N=11$, nous avons généré une matrice de bonne grandeure pour ensuite trouver le polynôme d'approximation complet et finalement trouvé la valeur du $RMS$. Après avoir tracé les 8 courbes et analysé les valeurs de $RMS$, il peut être observé que les polynômes pour $M=4,5,6,7$ ont un $RMS$ très similaire. Par contre, les courbes pour $M=4,6,7$ démontrent un comportement où le coefficient de friction augmente lorsque le pourcentage d'ouverture de la valve augmente, donc ces polynômes sont ignorés. La courbe restante est celle où $M=5$ et nous donne un polynôme d'ordre 4 qui est:
+\begin{equation}
+	\mu_f = 0.8691608391-0.0090679875x+0.0000287878x^2+0.0000005633x^3-0.0000000035x^4 
+\end{equation}
+La valeur du $RMS$ pour ce polynôme est $0.0176219$.
+
+\subsection{Coefficient de friction dynamique}
+hello hello je trouve le coefficient
+
+\subsection{Ouverture de la valve en \% pour $\mu_f=0.63$}
+Connaissant le coefficient de friction désiré, il faut simplement utiliser la fonction $roots()$ avec le polynôme d'approximation de $M=5$ pour trouver la valeur de l'ouverture de la valve en \%. La fonction $roots()$ nous donne quatre (4) résultats, mais on observe qu'un seul résultat nous donne une valeur infiérieure à 100, donc on ignore les autres. Le pourcentage d'ouverture de la valve pour $\mu_f=0.63$ est:
+\begin{equation}
+	ouverture = 30.88\%
+\end{equation}
+
+\subsection{Vitesse du participant le long de la trajectoire}
+Pour peter.
+
 
 \section{Cinématique}
 Dans l'analyse de la cinématique, il y avait trois cas à analyser. Il faut déterminer la relation du mouvement du Point A en reliant les mouvements angulaires des bras OB et BA au mouvement linéaire du point A dans tous les cas. Précisément, il faut déterminer les vecteurs de positions, de vitesses et d'accélération linéaire du point A en fonction des longueurs des bras, soit L1 et L2, des angles $\phi$ et $\theta$ et de leur vitesse et accélération angulaires respectives. Les calculs présentés dans la section suivante explique les démarches mathématiques utilisées pour la résolution des cas.
