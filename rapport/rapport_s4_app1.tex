@@ -70,17 +70,24 @@ Afin de trouver la vitesse de sortie du participant au point E, il faut utiliser
 En observant ce résultat, il est évident qu'une force de friction sera nécessaire afin de ralentir le participant pour ne pas dépasser les contraintes définies dans le devis.
 
 \subsection{Ordre et coefficients du polynôme d'approximation de $\mu_f$}
-Afin de trouver une bonne approximation de la relation entre le coefficient de friction et le pourcentage d'ouverture de la valve, nous avons utilisé la projection orthogonale. Pour chaque valeur de $M$ allant de $N-3$ à 1 où $N=11$, nous avons généré une matrice de bonne grandeure pour ensuite trouver le polynôme d'approximation complet et finalement trouvé la valeur du $RMS$. Après avoir tracé les 8 courbes et analysé les valeurs de $RMS$, il peut être observé que les polynômes pour $M=4,5,6,7$ ont un $RMS$ très similaire. Par contre, les courbes pour $M=4,6,7$ démontrent un comportement où le coefficient de friction augmente lorsque le pourcentage d'ouverture de la valve augmente, donc ces polynômes sont ignorés. La courbe restante est celle où $M=5$ et nous donne un polynôme d'ordre 4 qui est:
+Afin de trouver une bonne approximation de la relation entre le coefficient de friction et le pourcentage d'ouverture de la valve, nous avons utilisé la projection orthogonale. Pour chaque valeur de $M$ allant de $N-3$ à 1 où $N=11$, nous avons généré une matrice de bonne grandeur pour ensuite trouver le polynôme d'approximation complet et finalement trouvé la valeur du $RMS$. Après avoir tracé les 8 courbes et analysé les valeurs de $RMS$, il peut être observé que les polynômes pour $M=4,5,6,7$ ont un $RMS$ très similaire. Par contre, les courbes pour $M=4,6,7$ démontrent un comportement où le coefficient de friction augmente lorsque le pourcentage d'ouverture de la valve augmente, donc ces polynômes sont ignorés. La courbe restante est celle où $M=5$ et nous donne un polynôme d'ordre 4 qui est:
 \begin{equation}
 	\mu_f = 0.8691608391-0.0090679875x+0.0000287878x^2+0.0000005633x^3-0.0000000035x^4 
 \end{equation}
 La valeur du $RMS$ pour ce polynôme est $0.0176219$.
 
 \subsection{Coefficient de friction dynamique}
-hello hello je trouve le coefficient
+Pour pouvoir déterminer le coefficient de friction dynamique ($\mu_f$) voulu, il faut utiliser le théorème de la conservation de l'énergie mécanique(2). Dans notre cas, le devis indique que le coefficient choisit devrait faire en sorte que la vitesse finale des participants à la fin de la glissade soit de 22,5 km/h. On a donc l'équation:
+\begin{equation}
+	mg\Delta h + \frac{1}{2}mv^2 = \frac{x}{cos\theta}\mu_fmgcos\theta 
+\end{equation}
+En remplaçant les valeurs de notre situation soit $h_{initial}=30m$, $h_{final}=12,27m$, $x=25m$ et $v=6,25m/s$ on trouve la valeur de $\mu_f$:
+\begin{equation}
+	\mu_f = 0,63
+\end{equation}
 
 \subsection{Ouverture de la valve en \% pour $\mu_f=0.63$}
-Connaissant le coefficient de friction désiré, il faut simplement utiliser la fonction $roots()$ avec le polynôme d'approximation de $M=5$ pour trouver la valeur de l'ouverture de la valve en \%. La fonction $roots()$ nous donne quatre (4) résultats, mais on observe qu'un seul résultat nous donne une valeur infiérieure à 100, donc on ignore les autres. Le pourcentage d'ouverture de la valve pour $\mu_f=0.63$ est:
+Connaissant le coefficient de friction désiré, il faut simplement utiliser la fonction $roots()$ avec le polynôme d'approximation de $M=5$ pour trouver la valeur de l'ouverture de la valve en \%. La fonction $roots()$ nous donne quatre (4) résultats, mais on observe qu'un seul résultat nous donne une valeur inférieure à 100, donc on ignore les autres. Le pourcentage d'ouverture de la valve pour $\mu_f=0.63$ est:
 \begin{equation}
 	ouverture = 30.88\%
 \end{equation}
