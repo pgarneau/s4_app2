@@ -40,8 +40,7 @@
 
 \newpage
 \section{Introduction}
-THIS NEEDS TO BE CHANGEDDDD
-Dans le cadre de l'implémentation d'un système de commande du bras mécanique de l'entreprise CRM, il faut analyser le mouvement d'un point A sur le plan 2D de celui-ci. Le point A, situé à l'extrémité des bras du robot, bouge selon le bras BA attaché au moteur MB et le bras BA bouge selon le bras OB avec le moteur MO. Notre mandat est de déterminer les forces et les couples nécessaires pour maintenir le robot en équilibre ou de le bouger selon des directives spécifiques. Pour la résolution de la problématique, l'équipe a divisée l'ensemble en plusieurs étapes. La première étape fût de regarder la cinématique du système de manière générale, ensuite dans des cas avec des restrictions sur les mouvements possibles du point A dans le plan 2D. En deuxième partie, l'analyse est centrée sur la statique et la dynamique du système. 
+Dans le cadre de la conception d'une glissade à obstacles de style Wipe-Out, il faut répondre au devis émit par le WOQ. Les différents objectifs de conception que la société WOQ nous demandent sont: La conception de la trajectoire, déterminer l'ouverture de la valve, le calcul de la durée de la minuterie, la conception du coussin-trampoline et la conception du bassin d'eau. 
 
 \section{Design de la trajectoire et du débit d'eau}
 \subsection{Hauteur de $y_f$ et coefficients du polynôme d'interpolation de la trajectoire}
@@ -77,7 +76,18 @@ Afin de trouver une bonne approximation de la relation entre le coefficient de f
 La valeur du $RMS$ pour ce polynôme est $0.0176219$.
 
 \subsection{Coefficient de friction dynamique}
-hello hello je trouve le coefficient
+Pour pouvoir déterminer le coefficient de friction dynamique ($\mu_f$) voulu, il faut utiliser le théorème de la conservation de l'énergie mécanique(2). Dans notre cas, le devis indique que le coefficient choisit devrait faire en sorte que la vitesse finale des participants à la fin de la glissade soit de 22,5 km/h. On a donc l'équation:
+\begin{equation}
+	mg\Delta h + \frac{1}{2}mv^2 = \frac{x}{cos\theta}\mu_fmgcos\theta 
+\end{equation}
+Les m et les $cos\theta$ s'annule, on a donc:
+\begin{equation}
+	g\Delta h + \frac{1}{2}v^2 = x\mu_fg 
+\end{equation}
+En remplaçant les valeurs de notre situation soit $h_{initial}=30m$, $h_{final}=12,27m$, $x=25m$ et $v=6,25m/s$ on trouve la valeur de $\mu_f$:
+\begin{equation}
+	\mu_f = 0,63
+\end{equation}
 
 \subsection{Ouverture de la valve en \% pour $\mu_f=0.63$}
 Connaissant le coefficient de friction désiré, il faut simplement utiliser la fonction $roots()$ avec le polynôme d'approximation de $M=5$ pour trouver la valeur de l'ouverture de la valve en \%. La fonction $roots()$ nous donne quatre (4) résultats, mais on observe qu'un seul résultat nous donne une valeur infiérieure à 100, donc on ignore les autres. Le pourcentage d'ouverture de la valve pour $\mu_f=0.63$ est:
@@ -225,7 +235,8 @@ par la suite, on intègre chaque côté de l'équation. Comme le coté gauche es
     \end{array}\Bigg]  - 47\end{array}\Bigg] \Delta z
  \end{equation}
  
- 
+ \section{Conclusion}
+Pour conclure, ce projet est un projet peu réalisable, puisque le comité des initiations n'a pas les sous pour une telle glissade et il pourrait y avoir des blessures lorsque les participants tombe d'environ 10m pour ensuite tomber dans un étendu d'eau. Le risque de "flat" et de noyades et plutôt élevé. Par contre, toutes les demandes de la société WOQ ont été complété avec précision et le design technique de la glissade à obstacle pourrait commencer dès maintenant.
 
 
 \end{document}
