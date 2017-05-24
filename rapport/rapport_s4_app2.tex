@@ -48,6 +48,10 @@ Afin de trouver la valeur de $y_f$, plusieurs étapes ont été nécessaires. En
 \begin{equation}
 y = 30-4.6001x+0.6310x^2-0.0329x^3+0.0006x^4
 \end{equation}
+Ce polynôme peut être représenté par le graphique suivant:
+\begin{center}
+  \makebox[\textwidth]{\includegraphics[width=\linewidth]{interpolation}}
+\end{center}
 
 \subsection{Vitesse de sortie du participant au point E sans friction}
 Afin de trouver la vitesse de sortie du participant au point E, il faut utiliser la loi de conservation de l'énergie mécanique. Nous savons qu'il n'y a pas de force non-conservatives qui agissent sur notre systeme dans ce cas, donc l'equation est:
@@ -74,6 +78,11 @@ Afin de trouver une bonne approximation de la relation entre le coefficient de f
 	\mu_f = 0.8691608391-0.0090679875x+0.0000287878x^2+0.0000005633x^3-0.0000000035x^4 
 \end{equation}
 La valeur du $RMS$ pour ce polynôme est $0.0176219$.
+\newline
+Ces graphiques nous ont permis de faire l'analyse décrite si-dessus:
+\begin{center}
+  \makebox[\textwidth]{\includegraphics[width=\linewidth]{rms_curves}}
+\end{center}
 
 \subsection{Coefficient de friction dynamique}
 Pour pouvoir déterminer le coefficient de friction dynamique ($\mu_f$) voulu, il faut utiliser le théorème de la conservation de l'énergie mécanique(2). Dans notre cas, le devis indique que le coefficient choisit devrait faire en sorte que la vitesse finale des participants à la fin de la glissade soit de 22,5 km/h. On a donc l'équation:
@@ -110,72 +119,63 @@ Cette équation donne le graphique suivant:
 \end{center}
 
  
- \subsection{minuterie}
- Pour la situation G1, le coefficient de restitution = 0 et
- en utilisant les formules de conservation de l'energie 
+\section{Ballon-mousse et la minuterie}
+\subsection{Collision plastique}
+Pour la situation G1, le coefficient de restitution = 0 et en utilisant les formules de conservation de l'energie:
  
- \begin{equation}
- m_{a}V_{a}^{n} + m_{b}V_{b}^{n} =( m_{a} + m_{b})V_{ab}^{'n} 
- \end{equation}
- \begin{equation}
- e = \frac {V_{B}^{'n}-V_{A}^{'n}}{V_{A}^{n}-V_{B}^{n}} 
+\begin{equation}
+	m_{a}V_{a}^{n} + m_{b}V_{b}^{n} =( m_{a} + m_{b})V_{ab}^{'n} 
+\end{equation}
+\begin{equation}
+	e = \frac {V_{B}^{'n}-V_{A}^{'n}}{V_{A}^{n}-V_{B}^{n}} 
 \end{equation}  
 
- On détermine, sachant que $ e = 0$, $ V_{A}^{n}$ = 22,5 km/h et que  $V_{B}^{n}$ = 3,6 km/h on trouve rapidement
- \begin{equation}
-  80*22,5 +8*-3,6 = 88(V_{ab}^{'n})
+Sachant que $ e = 0$, $ V_{A}^{n}$ = 22,5 km/h et que  $V_{B}^{n}$ = 3,6 km/h on trouve rapidement:
+\begin{equation}
+	80*22,5 +8*-3,6 = 88(V_{ab}^{'n})
 \end{equation}  
-donnant
-
 \begin{equation}
 V_{ab}^{'n} = 20,127 km/h * (3600sec/1000m) = 5.59 m/s
 \end{equation}
 
-
-\vspace*{4mm}
- Pour la situation G2, ou le coefficient de restitution = 0.8 On développe comme suit:
-
- \begin{equation}
- 0,8 = \frac{V_{B}^{'n}-V_{A}^{'n}}{26,1}
-\end{equation} 
- \begin{equation}
- 20.88 = V_{B}^{'n}-V_{A}^{'n} 
-\end{equation} 
-En réarrangant l'équation (10) , on obtient:
- \begin{equation}
- 221,4 = 10V_{ab}^{'n}+V_{B}^{'n}
-\end{equation} 
-
-on isole  $V_{B}^{'n} = 221,4 - 10V_{A}^{'n}$ de l'équation (16) et en la remplaçant dans l'équation (15), on arrive au résultat suivant :
+\subsection{Collision semi-élastique}
+Pour la situation G2 où le coefficient de restitution = 0.8, on développe comme suit:
 \begin{equation}
-  20,88 = {221,4 - 10V_{A}^{'n}-V_{A}^{'n}}
+	0,8 = \frac{V_{B}^{'n}-V_{A}^{'n}}{26,1}
+\end{equation} 
+\begin{equation}
+	20.88 = V_{B}^{'n}-V_{A}^{'n} 
+\end{equation} 
+En réarrangant l'équation, on obtient:
+\begin{equation}
+	221,4 = 10V_{ab}^{'n}+V_{B}^{'n}
+\end{equation} 
+
+On isole  $V_{B}^{'n} = 221,4 - 10V_{A}^{'n}$ de l'équation et on remplace pour trouver:
+\begin{equation}
+	20,88 = {221,4 - 10V_{A}^{'n}-V_{A}^{'n}}
+\end{equation}
+\begin{equation}
+	V_{A}^{'n} = 18,229 Km/h *(3600sec/1000m) = 5,06 m/s
 \end{equation}
 
+\subsection{Durée de la minuterie avant l'ouverture de la trappe}
+Sachant tout cela, nous pouvons trouver le temps que prend le participant pour franchir la distance de 3m dans les deux cas. Pour le cas G1, avec incertitude de 0,02sec, on obtient un résultat de 0,54 sec pour quitter la surface et 0,59 sec pour G2. On peut donc choisir la moyenne comme temps de minuterie nous donnant  $\Delta t_{m}$ = 0,565 sec.
+
+\section{Coussin-trampoline}
+En se basant sur la formule de l'accéleration gravitationelle et de la formule des ressorts, on trouve facilement le $\Delta x$ en resolvant l'équation quadratique que donne notre developpement:
 \begin{equation}
-  V_{A}^{'n} = 18,229 Km/h *(3600sec/1000m) = 5,06 m/s
+	\ mg \Delta h = \frac{1}{2}k \Delta x ^2
 \end{equation}
-\vspace*{4mm}
+\begin{equation}
+	88*9,81*(5+\Delta x) = \frac{1}{2}*6000*\Delta x^2 
+\end{equation}
+\begin{equation}
+	0 = 3000\Delta x^2 - 863.28 \Delta x - 4316.4 \quad nous\quad  donnant\quad  un\quad  		\Delta x=\quad 1.35m 
+\end{equation}
 
-Sachant tout cela, nous pouvons trouver le temps que prennent le participant pour franchir la distance de 3m dans les deux cas. Pour le cas G1, avec incertitude de 0,02sec, on obtient un résultat de 0,54 sec pour quitter la surface et 0,59 sec pour G2. On peut donc choisir la moyenne comme temps de minuterie nous donnant  $\Delta t_{m}$ = 0,565 sec.
- 
- 
- \subsection{coussin trampoline}
- 
- EN se basant sur la formule de l'accéleration gravitationelle et de la formule des ressorts, on trouve facilement le $\Delta x$ en resolvant l'équation quadratique que donne notre developpement
- 
- \begin{equation}
-\ mg \Delta h = \frac{1}{2}k \Delta x ^2
- \end{equation}
- \begin{equation}
- 88*9,81*(5+\Delta x) = \frac{1}{2}*6000*\Delta x^2 
- \end{equation}
- \begin{equation}
- 0 = 3000\Delta x^2 - 863.28 \Delta x - 4316.4 \quad nous\quad  donnant\quad  un\quad  \Delta x=\quad 1.35m 
- \end{equation}
-
-\subsection{bassin}
-
-on débute avec l'équation donné dans l'énoncé
+\section{Bassin}
+On débute avec l'équation donné dans l'énoncé
 \begin{equation}
 \ m \frac{dv}{dt} = \sum F = mg - K_{f}mg - bv^2
 \end{equation}
@@ -196,7 +196,7 @@ On pose donc l'accélération à zero pour avoir le système à l'équilibre nou
 \ v_{e} = \sqrt{\frac{mg(1-K_{f})}{b}}
 \end{equation}
 
-par la suite on doit linéariser notre équation (27) pour pouvoir facilement isoler notre z. On commence par linéarisser notre seul terme non lineaire étant 
+par la suite on doit linéariser notre équation pour pouvoir facilement isoler notre z. On commence par linéariser notre seul terme non lineaire étant 
 
 \begin{equation}
 \ \frac{mg ( 1- K_{f})}{v} = \frac{mg}{v_{e}}(1-K_{f})+
@@ -236,7 +236,8 @@ par la suite, on intègre chaque côté de l'équation. Comme le côté gauche e
  \begin{equation}
  \frac{4,9644}{ -1,175}= \Delta z = -4,225 \quad donc \quad 4,23 m
  \end{equation}
- \section{Conclusion}
+ 
+\section{Conclusion}
 Pour conclure, ce projet est un projet peu réalisable, puisque le comité des initiations n'a pas les sous pour une telle glissade et il pourrait y avoir des blessures lorsque les participants tombe d'environ 10m pour ensuite tomber dans un étendu d'eau. Le risque de "flat" et de noyades et plutôt élevé. Par contre, toutes les demandes de la société WOQ ont été complété avec précision et le design technique de la glissade à obstacle pourrait commencer dès maintenant.
 
 
