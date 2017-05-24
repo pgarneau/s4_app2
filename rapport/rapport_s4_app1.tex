@@ -48,6 +48,10 @@ Afin de trouver la valeur de $y_f$, plusieurs étapes ont été nécessaires. En
 \begin{equation}
 y = 30-4.6001x+0.6310x^2-0.0329x^3+0.0006x^4
 \end{equation}
+Ce polynôme donne cette courbe:
+\begin{center}
+  \makebox[\textwidth]{\includegraphics[width=\linewidth]{interpolation}}
+\end{center}
 
 \subsection{Vitesse de sortie du participant au point E sans friction}
 Afin de trouver la vitesse de sortie du participant au point E, il faut utiliser la loi de conservation de l'energie mecanique. Nous savons qu'il n'y a pas de force non-conservatives qui agissent sur notre systeme dans ce cas, donc l'equation est:
@@ -74,6 +78,12 @@ Afin de trouver une bonne approximation de la relation entre le coefficient de f
 	\mu_f = 0.8691608391-0.0090679875x+0.0000287878x^2+0.0000005633x^3-0.0000000035x^4 
 \end{equation}
 La valeur du $RMS$ pour ce polynôme est $0.0176219$.
+\newline
+\newline
+Voici un apperçu des 8 courbes qui ont permis de prendre cette décision:
+\begin{center}
+  \makebox[\textwidth]{\includegraphics[width=\linewidth]{rms_curves}}
+\end{center}
 
 \subsection{Coefficient de friction dynamique}
 Pour pouvoir déterminer le coefficient de friction dynamique ($\mu_f$) voulu, il faut utiliser le théorème de la conservation de l'énergie mécanique(2). Dans notre cas, le devis indique que le coefficient choisit devrait faire en sorte que la vitesse finale des participants à la fin de la glissade soit de 22,5 km/h. On a donc l'équation:
@@ -132,7 +142,7 @@ Cette équation donne le graphique suivant:
  0 = 3000\Delta x^2 - 863.28 \Delta x - 4316.4 \quad nous\quad  donnant\quad  un\quad  \Delta x=\quad 1.35m 
  \end{equation}
  
-\section{bassin}
+\section{Bassin}
 on début avec l'équation donner dans l'énoncé
 \begin{equation}
 \ m \frac{dv}{dt} = \sum F = mg - K_{f}mg - bv^2
