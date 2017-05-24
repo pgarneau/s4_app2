@@ -218,7 +218,12 @@ et que lon sosutrait les terme de l'equation a lequilibre on obtiens l'equation 
 \end{equation}
 
 par la suite, on intègre chaque côté de l'équation. Comme le coté gauche est bornée de 0,1ve jusqu'a vi - ve, cela nous donne 4,9644. Comme le côté droit ne contient qu'une variable étant le dz qui deviendras $\Delta$ z
- Le reste du calcul effectuer sur matlab nous donne un z de 4,23m.
+ Le reste du calcul effectuer sur matlab nous donne un z de 4,23m car 
+ \begin{equation}
+ 4,9644 = \Bigg[\begin{array}{cc} \frac{1}{80} \Bigg[\begin{array}{cc}
+    \frac{-1}{0,913^2}80*9.81(1-0,95)
+    \end{array}\Bigg]  - 47\end{array}\Bigg] \Delta z
+ \end{equation}
  
  
 
