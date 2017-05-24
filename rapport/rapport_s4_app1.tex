@@ -156,12 +156,12 @@ on isole  $V_{B}^{'n} = 221,4 - 10V_{A}^{'n}$ de l'équation (16) et en la rempl
 \end{equation}
 \vspace*{4mm}
 
-Sachant tout cela, nous pouvons trouver le temps que prennent le participant pour franchir la distance de 3m dans les deux cas. Pour le cas G1, avec incertitude de 0,02sec, on obtiens un résultat de 0,54 sec pour quitter la surface de la plaque de 3m et pour G2, 0,59 sec. On peut donc choisir la moyenne comme temp de minuterie nous donnant un $\Delta t_{m}$ 0,565 sec.
+Sachant tout cela, nous pouvons trouver le temps que prennent le participant pour franchir la distance de 3m dans les deux cas. Pour le cas G1, avec incertitude de 0,02sec, on obtient un résultat de 0,54 sec pour quitter la surface et 0,59 sec pour G2. On peut donc choisir la moyenne comme temps de minuterie nous donnant  $\Delta t_{m}$ = 0,565 sec.
  
  
  \subsection{coussin trampoline}
  
- EN se basant sur la formule de l<acceleration gravitationelle et de la formule des ressorts, on trouve facilement le $\Delta x$ en resolvant lequation quadratique que donne notre developpement
+ EN se basant sur la formule de l'accéleration gravitationelle et de la formule des ressorts, on trouve facilement le $\Delta x$ en resolvant l'équation quadratique que donne notre developpement
  
  \begin{equation}
 \ mg \Delta h = \frac{1}{2}k \Delta x ^2
@@ -175,19 +175,19 @@ Sachant tout cela, nous pouvons trouver le temps que prennent le participant pou
 
 \subsection{bassin}
 
-on début avec l'équation donner dans l'énoncé
+on débute avec l'équation donné dans l'énoncé
 \begin{equation}
 \ m \frac{dv}{dt} = \sum F = mg - K_{f}mg - bv^2
 \end{equation}
-comme dictée par la 2e loi de Newton:
+comme dicté par la 2e loi de Newton:
 \begin{equation}
 \ \frac{dv}{dt} = \frac{dv}{dz} \frac{dz}{dt} = v\frac{dv}{dz}
 \end{equation}
-en faisant la substitution pr/c/dente, en regroupant les terme et en divisant les deux cote par v on obtiens:
+en faisant la substitution précédente, en regroupant les termes et en divisant les deux côté par v on obtiens:
 \begin{equation}
 \ m\frac{dv}{dz} =  \frac{mg ( 1- K_{f})}{v} - bv
 \end{equation}
-On pose donc l'accélération a zero pour avoir le systèeme a l'équilibre nous donnant l'équation 57
+On pose donc l'accélération à zero pour avoir le système à l'équilibre nous donnant l'équation :
 \begin{equation}
 \ 0 =  mg ( 1- K_{f}) - bv_{e})
 \end{equation}
@@ -196,7 +196,7 @@ On pose donc l'accélération a zero pour avoir le systèeme a l'équilibre nous
 \ v_{e} = \sqrt{\frac{mg(1-K_{f})}{b}}
 \end{equation}
 
-par la suite on doit linéariser notre équation 55 pour pouvoir facilement isoler notre z. On commence par linéarisser notre seul terme non lineaire etant 
+par la suite on doit linéariser notre équation (27) pour pouvoir facilement isoler notre z. On commence par linéarisser notre seul terme non lineaire étant 
 
 \begin{equation}
 \ \frac{mg ( 1- K_{f})}{v} = \frac{mg}{v_{e}}(1-K_{f})+
@@ -205,7 +205,7 @@ par la suite on doit linéariser notre équation 55 pour pouvoir facilement isol
     \end{array}\Bigg]
     (v-v_{e})
 \end{equation}
-en remplacant le tout dans lequation de base 55
+en remplaçant le tout dans l'équation de base 55
 \begin{equation}
 mv \frac{dv}{dz} = mg - \Bigg[\begin{array}{cc}
 \frac{mg}{v_{e}}(1-K_{f})+
@@ -214,12 +214,12 @@ mv \frac{dv}{dz} = mg - \Bigg[\begin{array}{cc}
     \end{array}\Bigg]
     (v-v_{e}) \end{array}\Bigg] - bv
 \end{equation}
-comme la on sait que
+comme on sait que
 \begin{equation}
 \Delta v = v - v_{e}  \quad  \textrm{donc} \quad    v = \Delta v+ v_{e}
 \end{equation}
 
-et que lon sosutrait les terme de l'equation a lequilibre on obtiens l'equation lineaire  ( en isolant les v et le z de chaque coté ):
+et que lon soustrait les termes de l'équation à l'équilibre on obtient l'équation lineaire  ( en isolant les v et le z de chaque coté ):
 
 \begin{equation}
 \ m \frac{d \Delta v}{\Delta v}= \Bigg[\begin{array}{cc} \frac{1}{m} \Bigg[\begin{array}{cc}
@@ -227,8 +227,7 @@ et que lon sosutrait les terme de l'equation a lequilibre on obtiens l'equation 
     \end{array}\Bigg]  - b\end{array}\Bigg] d_{z}
 \end{equation}
 
-par la suite, on intègre chaque côté de l'équation. Comme le coté gauche est bornée de 0,1ve jusqu'a vi - ve, cela nous donne 4,9644. Comme le côté droit ne contient qu'une variable étant le dz qui deviendras $\Delta$ z
- Le reste du calcul effectuer sur matlab nous donne un z de 4,23m car 
+par la suite, on intègre chaque côté de l'équation. Comme le côté gauche est bornée de 0,1ve jusqu'a vi - ve  (donnant 13,09)  cela nous donne 4,9644. Comme le côté droit ne contient qu'une variable étant le dz qui deviendras $\Delta$ z, le reste du calcul effectuer sur matlab nous donne un z de 4,23m car 
  \begin{equation}
  4,9644 = \Bigg[\begin{array}{cc} \frac{1}{80} \Bigg[\begin{array}{cc}
     \frac{-1}{0,913^2}80*9.81(1-0,95)
